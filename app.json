@@ -20,15 +20,16 @@
         "foregroundImage": "./assets/adaptive-icon.png",
         "backgroundColor": "#ffffff"
       },
-      "package": "com.cris2108.proyecto"
+      "package": "com.jocelin_1.proyecto"
     },
     "web": {
       "favicon": "./assets/favicon.png"
     },
     "extra": {
       "eas": {
-        "projectId": "59500a7b-46b1-48b8-884f-0f5e71399fc8"
+        "projectId": "bd51316a-29d4-40cc-bc7b-566aaced7bd0"
       }
-    }
+    },
+    "owner": "jocelin_1"
   }
 }

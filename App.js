@@ -34,13 +34,13 @@ const styles = StyleSheet.create({
     backgroundColor: "blue",
     color: "white", 
     padding: 10,
-    borderRadius: 5, // Redondeo de los bordes
-    width: "80%", // Tamaño adecuado para el input
-    marginBottom: 15, // Espaciado entre los inputs
+    borderRadius: 5,
+    width: "80%",
+    marginBottom: 15, 
   },
   inputView: {
     flex: 1,
-    width: "80%", // Asegurando que el contenedor tenga un ancho adecuado
+    width: "80%",
   },
   button: {
     backgroundColor: "green",
