@@ -4,6 +4,7 @@ import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import { StyleSheet, Text, View, TouchableOpacity } from "react-native";
 import InicioSesion from "./src/screens/InicioSesion";
 import Principal from "./src/screens/Principal";
+import Conexion from "./src/screens/Conexion"; 
 
 const Stack = createNativeStackNavigator();
 
@@ -12,6 +13,7 @@ export default function App() {
     <NavigationContainer>
       <Stack.Navigator initialRouteName="InicioSesion">
         <Stack.Screen name="InicioSesion" component={InicioSesion} />
+        <Stack.Screen name="Conexion" component={Conexion} />
         <Stack.Screen name="Principal" component={Principal} />
       </Stack.Navigator>
     </NavigationContainer>

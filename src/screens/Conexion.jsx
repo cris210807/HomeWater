@@ -3,45 +3,42 @@ import { Text, TextInput, TouchableOpacity, View, Alert, StyleSheet } from "reac
 import { useNavigation } from "@react-navigation/native";
 import Icon from "react-native-vector-icons/Feather";
 
-const InicioSesion = () => {
+const Conexion = () => {
   const navigation = useNavigation();
-  const [user, setUser] = useState("");
-  const [pass, setPass] = useState("");
+  const [ssid, setSsid] = useState("");
+  const [password, setPassword] = useState("");
   const [mostrarPass, setMostrarPass] = useState(false);
 
-  const userList = [
-    { user: "cris", pass: "cris21" },
-    { user: "joce", pass: "joce23" },
-  ];
+  const verificarConexion = () => {
+    
+    const redValida = "Domotica";
+    const passValida = "12345678";
 
-  const goIn = () => {
-    const validUser = userList.find((u) => u.user === user && u.pass === pass);
-
-    if (validUser) {
-      navigation.navigate("Conexion");
+    if (ssid === redValida && password === passValida) {
+      navigation.navigate("Principal");
     } else {
-      Alert.alert("Error", "Usuario o contraseña incorrecta");
+      Alert.alert("Error", "El nombre de la red o la contraseña son invalidos");
     }
   };
 
   return (
     <View style={styles.container}>
       <View style={styles.titleContainer}>
-        <Text style={styles.title}>Iniciar Sesión</Text>
+        <Text style={styles.title}>Configurar Conexión</Text>
       </View>
 
       <TextInput
-        placeholder="Usuario"
-        value={user}
-        onChangeText={setUser}
+        placeholder="Nombre de red:"
+        value={ssid}
+        onChangeText={setSsid}
         style={styles.input}
       />
 
       <View style={styles.passwordContainer}>
         <TextInput
           placeholder="Contraseña"
-          value={pass}
-          onChangeText={setPass}
+          value={password}
+          onChangeText={setPassword}
           secureTextEntry={!mostrarPass}
           style={styles.inputPassword}
         />
@@ -50,8 +47,8 @@ const InicioSesion = () => {
         </TouchableOpacity>
       </View>
 
-      <TouchableOpacity onPress={goIn} style={styles.button}>
-        <Text style={styles.buttonText}>Iniciar Sesión</Text>
+      <TouchableOpacity onPress={verificarConexion} style={styles.button}>
+        <Text style={styles.buttonText}>Conectar</Text>
       </TouchableOpacity>
     </View>
   );
@@ -113,4 +110,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default InicioSesion;
+export default Conexion;

@@ -1,4 +1,4 @@
-import React, { useState, useRef } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import { View, Text, TouchableOpacity, Animated, StyleSheet, Image, ImageBackground } from 'react-native';
 import carro from '../../assets/carro_on.png';
 import jardin from '../../assets/jardin_on.png';
@@ -6,9 +6,45 @@ import regadera from '../../assets/regadera_on.png';
 import wc from '../../assets/wc_on.png';
 import lavabo from '../../assets/lavabo_on.png';
 
-const ProfileScreen = () => {
+const Principal = () => {
   const [nivelDeAgua, setNivelDeAgua] = useState(100);
   const nivelAnimado = useRef(new Animated.Value(100)).current;
+  const [ws, setWs] = useState(null);
+
+  useEffect(() => {
+    const webSocket = new WebSocket('ws:');
+
+    webSocket.onopen = () => {
+      console.log('Se ha establecido la conexion');
+      setWs(webSocket);
+    };
+
+    webSocket.onmessage = (message) => {
+      console.log('Mensaje recibido:', message.data);
+      const data = JSON.parse(message.data);
+      if (data.nivelDeAgua) {
+        setNivelDeAgua(data.nivelDeAgua);
+        Animated.timing(nivelAnimado, {
+          toValue: data.nivelDeAgua,
+          duration: 1000,
+          useNativeDriver: false,
+        }).start();
+      }
+    };
+
+    webSocket.onclose = () => {
+      console.log('Se ha cerrado la conexion');
+      setWs(null);
+    };
+
+    webSocket.onerror = (error) => {
+      console.error('Error en WebSocket:', error.message);
+    };
+
+    return () => {
+      webSocket.close();
+    };
+  }, []);
 
   const actions = [
     { name: 'Lavado de auto', image: carro, usage: 20 },
@@ -27,6 +63,10 @@ const ProfileScreen = () => {
       duration: 1000,
       useNativeDriver: false,
     }).start();
+
+    if (ws) {
+      ws.send(JSON.stringify({ nivelDeAgua: nuevoNivel }));
+    }
   };
 
   const restablecerContenedor = () => {
@@ -36,6 +76,10 @@ const ProfileScreen = () => {
       duration: 1000,
       useNativeDriver: false,
     }).start();
+
+    if (ws) {
+      ws.send(JSON.stringify({ nivelDeAgua: 100 }));
+    }
   };
 
   return (
@@ -43,7 +87,6 @@ const ProfileScreen = () => {
       source={require('../../assets/fondo.png')}
       style={styles.backgroundImage}
     >
-
       <View style={styles.container}>
         <View style={styles.waterContainer}>
           <Animated.View
@@ -136,4 +179,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default ProfileScreen;
+export default Principal;
