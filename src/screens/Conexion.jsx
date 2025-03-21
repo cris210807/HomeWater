@@ -1,7 +1,9 @@
 import React, { useState } from "react";
 import { Text, TextInput, TouchableOpacity, View, Alert, StyleSheet } from "react-native";
 import { useNavigation } from "@react-navigation/native";
+import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import Icon from "react-native-vector-icons/Feather";
+import Principal from "./Principal";
 
 const Conexion = () => {
   const navigation = useNavigation();
