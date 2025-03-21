@@ -14,7 +14,7 @@ const Conexion = () => {
   const verificarConexion = () => {
     
     const redValida = "Domotica";
-    const passValida = "12345678";
+    const passValida = "1234567890";
 
     if (ssid === redValida && password === passValida) {
       navigation.navigate("Principal");

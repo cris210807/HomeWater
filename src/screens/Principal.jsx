@@ -12,7 +12,7 @@ const Principal = () => {
   const [ws, setWs] = useState(null);
 
   useEffect(() => {
-    const webSocket = new WebSocket('ws:');
+    const webSocket = new WebSocket('ws://ip/ws');
 
     webSocket.onopen = () => {
       console.log('Se ha establecido la conexion');
